@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nike - Sign In or Join</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fnikeclone8010back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background font-inter">
+    <!-- Simplified Header -->
+    <header class="sticky top-0 z-50 bg-secondary shadow-nike-sm">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Back Button & Logo -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.location.href='homepage.html'" class="p-2 hover:bg-nike-gray-100 rounded-full transition-nike">
+                        <svg class="w-6 h-6 text-nike-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <a href="homepage.html" class="flex items-center">
+                        <svg class="w-12 h-8 text-nike-black" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.456 0-2.525-.616-3.668-1.848C-1.456 13.737-.616 12.505.617 11.58L24 7.8z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Right Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search -->
+                    <button class="p-2" onclick="window.location.href='search_results.html'">
+                        <svg class="w-6 h-6 text-nike-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Cart -->
+                    <button class="p-2 relative" onclick="window.location.href='shopping_cart.html'">
+                        <svg class="w-6 h-6 text-nike-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"/>
+                        </svg>
+                        <span class="absolute -top-1 -right-1 bg-accent text-nike-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Authentication Content -->
+    <main class="min-h-screen bg-nike-gray-50">
+        <div class="container mx-auto px-4 py-8">
+            <div class="max-w-md mx-auto">
+                <!-- Tab Navigation -->
+                <div class="nike-card mb-8">
+                    <div class="flex border-b border-nike-gray-300">
+                        <button id="signInTab" onclick="switchTab('signIn')" class="flex-1 py-4 px-6 text-center font-medium transition-nike border-b-2 border-nike-black text-nike-black">
+                            Sign In
+                        </button>
+                        <button id="joinTab" onclick="switchTab('join')" class="flex-1 py-4 px-6 text-center font-medium transition-nike border-b-2 border-transparent text-nike-gray-500 hover:text-nike-black">
+                            Join Us
+                        </button>
+                    </div>
+                    
+                    <!-- Sign In Form -->
+                    <div id="signInForm" class="p-6">
+                        <h2 class="text-2xl font-bold mb-6 text-nike-black">Welcome Back</h2>
+                        
+                        <!-- Social Login Options -->
+                        <div class="space-y-3 mb-6">
+                            <button class="w-full nike-input flex items-center justify-center space-x-3 py-3 border border-nike-gray-300 hover:border-nike-black transition-nike">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                </svg>
+                                <span>Continue with Google</span>
+                            </button>
+                            
+                            <button class="w-full nike-input flex items-center justify-center space-x-3 py-3 border border-nike-gray-300 hover:border-nike-black transition-nike">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+                                </svg>
+                                <span>Continue with Apple</span>
+                            </button>
+                        </div>
+                        
+                        <div class="relative mb-6">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-nike-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-nike-white text-nike-gray-500">or</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Email/Username Input -->
+                        <div class="mb-4">
+                            <label for="signInEmail" class="block text-sm font-medium text-nike-black mb-2">Email or Username</label>
+                            <input type="text" id="signInEmail" class="nike-input w-full" placeholder="Enter your email or username" value="john.doe@email.com" />
+                            <div id="signInEmailError" class="hidden text-error text-sm mt-1">Please enter a valid email or username</div>
+                        </div>
+                        
+                        <!-- Password Input -->
+                        <div class="mb-4">
+                            <label for="signInPassword" class="block text-sm font-medium text-nike-black mb-2">Password</label>
+                            <div class="relative">
+                                <input type="password" id="signInPassword" class="nike-input w-full pr-12" placeholder="Enter your password" value="password123" />
+                                <button type="button" onclick="togglePasswordVisibility('signInPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-nike-gray-500 hover:text-nike-black transition-nike">
+                                    <svg id="signInPasswordEye" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="signInPasswordError" class="hidden text-error text-sm mt-1">Password is required</div>
+                        </div>
+                        
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="flex items-center justify-between mb-6">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="w-4 h-4 text-accent border-nike-gray-300 rounded focus:ring-accent focus:ring-2" />
+                                <span class="ml-2 text-sm text-nike-gray-500">Remember me</span>
+                            </label>
+                            <button type="button" onclick="showForgotPassword()" class="text-sm text-accent hover:text-orange-600 transition-nike">
+                                Forgot password?
+                            </button>
+                        </div>
+                        
+                        <!-- Sign In Button -->
+                        <button onclick="handleSignIn()" class="nike-btn-primary w-full text-lg py-3 rounded-full hover:scale-105 transition-nike-smooth mb-4">
+                            Sign In
+                        </button>
+                        
+                        <!-- SSL Security Badge -->
+                        <div class="flex items-center justify-center text-sm text-nike-gray-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            Secured with SSL encryption
+                        </div>
+                    </div>
+                    
+                    <!-- Join Us Form -->
+                    <div id="joinForm" class="p-6 hidden">
+                        <h2 class="text-2xl font-bold mb-6 text-nike-black">Become a Nike Member</h2>
+                        
+                        <!-- Social Registration Options -->
+                        <div class="space-y-3 mb-6">
+                            <button class="w-full nike-input flex items-center justify-center space-x-3 py-3 border border-nike-gray-300 hover:border-nike-black transition-nike">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                </svg>
+                                <span>Sign up with Google</span>
+                            </button>
+                            
+                            <button class="w-full nike-input flex items-center justify-center space-x-3 py-3 border border-nike-gray-300 hover:border-nike-black transition-nike">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+                                </svg>
+                                <span>Sign up with Apple</span>
+                            </button>
+                        </div>
+                        
+                        <div class="relative mb-6">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-nike-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-nike-white text-nike-gray-500">or</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Email Input -->
+                        <div class="mb-4">
+                            <label for="joinEmail" class="block text-sm font-medium text-nike-black mb-2">Email Address</label>
+                            <input type="email" id="joinEmail" class="nike-input w-full" placeholder="Enter your email address" value="jane.smith@email.com" />
+                            <div id="joinEmailError" class="hidden text-error text-sm mt-1">Please enter a valid email address</div>
+                        </div>
+                        
+                        <!-- Password Input with Strength Indicator -->
+                        <div class="mb-4">
+                            <label for="joinPassword" class="block text-sm font-medium text-nike-black mb-2">Password</label>
+                            <div class="relative">
+                                <input type="password" id="joinPassword" class="nike-input w-full pr-12" placeholder="Create a password" value="securepass456" oninput="checkPasswordStrength()" />
+                                <button type="button" onclick="togglePasswordVisibility('joinPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-nike-gray-500 hover:text-nike-black transition-nike">
+                                    <svg id="joinPasswordEye" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator -->
+                            <div class="mt-2">
+                                <div class="flex space-x-1">
+                                    <div id="strength1" class="h-1 w-1/4 bg-nike-gray-300 rounded"></div>
+                                    <div id="strength2" class="h-1 w-1/4 bg-nike-gray-300 rounded"></div>
+                                    <div id="strength3" class="h-1 w-1/4 bg-nike-gray-300 rounded"></div>
+                                    <div id="strength4" class="h-1 w-1/4 bg-nike-gray-300 rounded"></div>
+                                </div>
+                                <div id="strengthText" class="text-sm text-nike-gray-500 mt-1">Password strength: Strong</div>
+                            </div>
+                            <div id="joinPasswordError" class="hidden text-error text-sm mt-1">Password must be at least 8 characters</div>
+                        </div>
+                        
+                        <!-- Name Fields -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-nike-black mb-2">First Name</label>
+                                <input type="text" id="firstName" class="nike-input w-full" placeholder="First name" value="Jane" />
+                                <div id="firstNameError" class="hidden text-error text-sm mt-1">First name is required</div>
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-nike-black mb-2">Last Name</label>
+                                <input type="text" id="lastName" class="nike-input w-full" placeholder="Last name" value="Smith" />
+                                <div id="lastNameError" class="hidden text-error text-sm mt-1">Last name is required</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Marketing Preferences -->
+                        <div class="mb-6">
+                            <label class="flex items-start">
+                                <input type="checkbox" class="w-4 h-4 text-accent border-nike-gray-300 rounded focus:ring-accent focus:ring-2 mt-1" />
+                                <span class="ml-2 text-sm text-nike-gray-500">
+                                    Sign up for emails to get updates from Nike on products, offers and your Member benefits
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <!-- Terms Agreement -->
+                        <div class="mb-6">
+                            <label class="flex items-start">
+                                <input type="checkbox" class="w-4 h-4 text-accent border-nike-gray-300 rounded focus:ring-accent focus:ring-2 mt-1" required />
+                                <span class="ml-2 text-sm text-nike-gray-500">
+                                    I agree to Nike's <a href="javascript:void(0)" class="text-accent hover:text-orange-600 transition-nike">Privacy Policy</a> and <a href="javascript:void(0)" class="text-accent hover:text-orange-600 transition-nike">Terms of Use</a>
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <!-- Join Button -->
+                        <button onclick="handleJoin()" class="nike-btn-primary w-full text-lg py-3 rounded-full hover:scale-105 transition-nike-smooth mb-4">
+                            Join Us
+                        </button>
+                        
+                        <!-- SSL Security Badge -->
+                        <div class="flex items-center justify-center text-sm text-nike-gray-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            Secured with SSL encryption
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nike Membership Benefits -->
+                <div class="nike-card p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-nike-black">Nike Membership Benefits</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-nike-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nike-black">Exclusive Access</h4>
+                                <p class="text-sm text-nike-gray-500">Be the first to shop new releases and limited editions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-nike-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nike-black">Member Pricing</h4>
+                                <p class="text-sm text-nike-gray-500">Enjoy special discounts and member-only pricing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-nike-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nike-black">Free Shipping</h4>
+                                <p class="text-sm text-nike-gray-500">Free standard shipping on all orders, no minimum</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-nike-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nike-black">Birthday Rewards</h4>
+                                <p class="text-sm text-nike-gray-500">Special birthday offers and personalized experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="fixed inset-0 bg-nike-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="nike-card max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-nike-black">Reset Password</h3>
+                <button onclick="closeForgotPassword()" class="text-nike-gray-500 hover:text-nike-black transition-nike">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="text-nike-gray-500 mb-4">Enter your email address and we'll send you a link to reset your password.</p>
+            <div class="mb-4">
+                <label for="resetEmail" class="block text-sm font-medium text-nike-black mb-2">Email Address</label>
+                <input type="email" id="resetEmail" class="nike-input w-full" placeholder="Enter your email address" />
+            </div>
+            <button onclick="handlePasswordReset()" class="nike-btn-primary w-full py-3 rounded-full hover:scale-105 transition-nike-smooth">
+                Send Reset Link
+            </button>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+    <!-- Footer -->
+    <footer class="bg-nike-black text-nike-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <svg class="w-12 h-8 text-nike-white mr-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.456 0-2.525-.616-3.668-1.848C-1.456 13.737-.616 12.505.617 11.58L24 7.8z"/>
+                        </svg>
+                        <span class="text-xl font-bold">NIKE</span>
+                    </div>
+                    <p class="text-nike-gray-300 mb-4">Just Do It. Bringing inspiration and innovation to every athlete in the world.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-4">Shop</h4>
+                    <ul class="space-y-2 text-nike-gray-300">
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Men</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Women</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Kids</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Help -->
+                <div>
+                    <h4 class="font-semibold mb-4">Help</h4>
+                    <ul class="space-y-2 text-nike-gray-300">
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Order Status</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Shipping & Delivery</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Returns</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- About -->
+                <div>
+                    <h4 class="font-semibold mb-4">About Nike</h4>
+                    <ul class="space-y-2 text-nike-gray-300">
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">News</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Careers</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Sustainability</a></li>
+                        <li><a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Purpose</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="border-t border-nike-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-nike-gray-300 text-sm mb-4 md:mb-0">
+                    © 2025 Nike, Inc. All Rights Reserved.
+                </div>
+                <div class="flex space-x-6 text-nike-gray-300 text-sm">
+                    <a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Privacy Policy</a>
+                    <a href="javascript:void(0)" class="hover:text-nike-white transition-nike">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switching Functionality
+        function switchTab(tab) {
+            const signInTab = document.getElementById('signInTab');
+            const joinTab = document.getElementById('joinTab');
+            const signInForm = document.getElementById('signInForm');
+            const joinForm = document.getElementById('joinForm');
+            
+            if (tab === 'signIn') {
+                signInTab.classList.add('border-nike-black', 'text-nike-black');
+                signInTab.classList.remove('border-transparent', 'text-nike-gray-500');
+                joinTab.classList.add('border-transparent', 'text-nike-gray-500');
+                joinTab.classList.remove('border-nike-black', 'text-nike-black');
+                
+                signInForm.classList.remove('hidden');
+                joinForm.classList.add('hidden');
+            } else {
+                joinTab.classList.add('border-nike-black', 'text-nike-black');
+                joinTab.classList.remove('border-transparent', 'text-nike-gray-500');
+                signInTab.classList.add('border-transparent', 'text-nike-gray-500');
+                signInTab.classList.remove('border-nike-black', 'text-nike-black');
+                
+                joinForm.classList.remove('hidden');
+                signInForm.classList.add('hidden');
+            }
+        }
+        
+        // Password Visibility Toggle
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(inputId + 'Eye');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>
+                `;
+            } else {
+                input.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                `;
+            }
+        }
+        
+        // Password Strength Checker
+        function checkPasswordStrength() {
+            const password = document.getElementById('joinPassword').value;
+            const strength1 = document.getElementById('strength1');
+            const strength2 = document.getElementById('strength2');
+            const strength3 = document.getElementById('strength3');
+            const strength4 = document.getElementById('strength4');
+            const strengthText = document.getElementById('strengthText');
+            
+            // Reset all indicators
+            [strength1, strength2, strength3, strength4].forEach(el => {
+                el.className = 'h-1 w-1/4 bg-nike-gray-300 rounded';
+            });
+            
+            let strength = 0;
+            let strengthLabel = 'Weak';
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const indicators = [strength1, strength2, strength3, strength4];
+            
+            if (strength >= 1) {
+                indicators[0].className = 'h-1 w-1/4 bg-error rounded';
+                strengthLabel = 'Weak';
+            }
+            if (strength >= 2) {
+                indicators[1].className = 'h-1 w-1/4 bg-warning rounded';
+                strengthLabel = 'Fair';
+            }
+            if (strength >= 3) {
+                indicators[2].className = 'h-1 w-1/4 bg-warning rounded';
+                strengthLabel = 'Good';
+            }
+            if (strength >= 4) {
+                indicators[3].className = 'h-1 w-1/4 bg-success rounded';
+                strengthLabel = 'Strong';
+            }
+            
+            strengthText.textContent = `Password strength: ${strengthLabel}`;
+        }
+        
+        // Forgot Password Modal
+        function showForgotPassword() {
+            document.getElementById('forgotPasswordModal').classList.remove('hidden');
+        }
+        
+        function closeForgotPassword() {
+            document.getElementById('forgotPasswordModal').classList.add('hidden');
+        }
+        
+        // Handle Password Reset
+        function handlePasswordReset() {
+            const email = document.getElementById('resetEmail').value;
+            if (email) {
+                showMessage('Password reset link sent to your email!', 'success');
+                closeForgotPassword();
+            } else {
+                showMessage('Please enter your email address', 'error');
+            }
+        }
+        
+        // Handle Sign In
+        function handleSignIn() {
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+            
+            // Mock validation
+            if (email && password) {
+                showMessage('Sign in successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'user_account_dashboard.html';
+                }, 1500);
+            } else {
+                showMessage('Please fill in all required fields', 'error');
+            }
+        }
+        
+        // Handle Join
+        function handleJoin() {
+            const email = document.getElementById('joinEmail').value;
+            const password = document.getElementById('joinPassword').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            
+            // Mock validation
+            if (email && password && firstName && lastName) {
+                showMessage('Account created successfully! Welcome to Nike!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'user_account_dashboard.html';
+                }, 1500);
+            } else {
+                showMessage('Please fill in all required fields', 'error');
+            }
+        }
+        
+        // Show Message Function
+        function showMessage(message, type) {
+            const container = document.getElementById('messageContainer');
+            const messageDiv = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-success' : 'bg-error';
+            
+            messageDiv.className = `${bgColor} text-nike-white px-4 py-3 rounded-lg shadow-nike-lg flex items-center space-x-2 animate-nike-slide-up`;
+            messageDiv.innerHTML = `
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${type === 'success' 
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>'
+                        : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>'
+                    }
+                </svg>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 4000);
+        }
+        
+        // Initialize password strength on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkPasswordStrength();
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('forgotPasswordModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeForgotPassword();
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

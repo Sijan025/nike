@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --color-primary: #000000; /* black - Nike's bold brand authority */
+  --color-secondary: #FFFFFF; /* white - clean premium feel */
+  --color-accent: #FF6B35; /* orange-500 - Nike's signature orange */
+  
+  /* Background Colors */
+  --color-background: #FAFAFA; /* gray-50 - subtle off-white */
+  --color-surface: #F5F5F5; /* gray-100 - light gray for cards */
+  
+  /* Text Colors */
+  --color-text-primary: #111111; /* gray-900 - near-black for readability */
+  --color-text-secondary: #666666; /* gray-500 - medium gray for supporting info */
+  
+  /* Status Colors */
+  --color-success: #22C55E; /* green-500 - positive confirmations */
+  --color-warning: #F59E0B; /* amber-500 - inventory alerts */
+  --color-error: #EF4444; /* red-500 - validation errors */
+  
+  /* Border Colors */
+  --color-border: #E5E5E5; /* gray-300 - minimal borders */
+  --color-border-active: #FF6B35; /* orange-500 - active states */
+  
+  /* Shadow Values */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  
+  /* Animation Timing */
+  --transition-fast: 200ms ease-out;
+  --transition-smooth: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+}
+
+@layer components {
+  .nike-card {
+    background: var(--color-secondary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+  }
+  
+  .nike-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  
+  .nike-btn-primary {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+  }
+  
+  .nike-btn-primary:hover {
+    background: var(--color-text-primary);
+    transform: translateY(-1px);
+  }
+  
+  .nike-btn-accent {
+    background: var(--color-accent);
+    color: var(--color-secondary);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+  }
+  
+  .nike-btn-accent:hover {
+    background: #E55A2B;
+    transform: translateY(-1px);
+  }
+  
+  .nike-input {
+    border: 1px solid var(--color-border);
+    padding: 12px 16px;
+    border-radius: 6px;
+    background: var(--color-secondary);
+    transition: all var(--transition-fast);
+  }
+  
+  .nike-input:focus {
+    border-color: var(--color-border-active);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  }
+}
+
+@layer utilities {
+  .text-data {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .transition-nike {
+    transition: all var(--transition-fast);
+  }
+  
+  .transition-nike-smooth {
+    transition: all var(--transition-smooth);
+  }
+  
+  .shadow-nike-sm {
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .shadow-nike-lg {
+    box-shadow: var(--shadow-lg);
+  }
+}
